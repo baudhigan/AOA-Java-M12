@@ -1,6 +1,6 @@
 
 # EX 2E Pattern Matching using KMP Algorithm.
-## DATE:
+
 ## AIM:
 To write a Java program for the following constraints.
 Longest Palindromic Substring
@@ -8,23 +8,69 @@ Given a string s, return the longest palindromic substring in s.
 using Manacher's Algorithm
 
 ## Algorithm
-1. 
-2. 
-3. 
-4.  
-5.   
+Start the program and import the required Java utility classes.
+Read the number of test cases T from the user.
+For each test case, input the text string and the pattern string.
+Use a loop to slide the pattern over the text and compare each substring with the pattern.
+Store all matching starting indices in a list and print them; if no match is found, print -1. 
 
 ## Program:
 ```
-/*
-Program to implement Reverse a String
-Developed by: 
-Register Number:  
-*/
+
+import java.util.*;
+
+public class PatternMatching {
+//type your code
+    public static List<Integer> findPatternIndices(String text, String pattern) {
+        List<Integer> result = new ArrayList<>();
+        int n = text.length();
+        int m = pattern.length();
+
+        // Only check up to n - m
+        for (int i = 0; i <= n - m; i++) {
+            int j;
+            for (j = 0; j < m; j++) {
+                if (text.charAt(i + j) != pattern.charAt(j)) {
+                    break;
+                }
+            }
+            if (j == m) { // pattern matched
+                result.add(i);
+            }
+        }
+
+        // If no matches, return [-1]
+        if (result.isEmpty()) {
+            result.add(-1);
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int T = Integer.parseInt(scanner.nextLine()); // number of test cases
+
+        for (int t = 0; t < T; t++) {
+            String text = scanner.nextLine();
+            String pattern = scanner.nextLine();
+
+            List<Integer> indices = findPatternIndices(text, pattern);
+            for (int idx : indices) {
+                System.out.print(idx + " ");
+            }
+            System.out.println();
+        }
+
+        scanner.close();
+    }
+}
 ```
 
 ## Output:
 
+<img width="665" height="275" alt="image" src="https://github.com/user-attachments/assets/f28f1014-5aa0-459f-abd1-5e39de809734" />
 
 
 ## Result:
